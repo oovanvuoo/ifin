@@ -90,26 +90,6 @@ ENV=prod npx playwright test tests/smoke
 ENV=prod npx playwright test tests/api
 ```
 
-### npm script shortcuts (all default to STG)
-
-```bash
-npm run test          # run all tests
-npm run smoke         # tests tagged @smoke
-npm run sanity        # tests tagged @sanity
-npm run regression    # tests tagged @regression
-npm run api           # tests/api folder
-npm run e2e           # tests tagged @e2e
-```
-
-Dedicated environment scripts:
-
-```bash
-npm run test:stg      npm run test:uat      npm run test:prod
-npm run smoke:stg     npm run smoke:uat     npm run smoke:prod
-npm run api:stg       npm run api:uat       npm run api:prod
-npm run regression:stg  npm run regression:uat  npm run regression:prod
-```
-
 ## 5. Reporting
 
 ```bash
