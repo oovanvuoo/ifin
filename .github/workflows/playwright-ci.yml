@@ -81,22 +81,22 @@ jobs:
           echo "Running suite '${{ steps.target.outputs.suite }}' on ENV='${{ steps.target.outputs.env }}'"
           case "${{ steps.target.outputs.suite }}" in
             smoke)
-              ENV=${{ steps.target.outputs.env }} npm run smoke
+              ENV=${{ steps.target.outputs.env }} npx playwright test tests/smoke
               ;;
             sanity)
-              ENV=${{ steps.target.outputs.env }} npm run sanity
+              ENV=${{ steps.target.outputs.env }} npx playwright test tests/sanity
               ;;
             regression)
-              ENV=${{ steps.target.outputs.env }} npm run regression
+              ENV=${{ steps.target.outputs.env }} npx playwright test tests/regression
               ;;
             api)
-              ENV=${{ steps.target.outputs.env }} npm run api
+              ENV=${{ steps.target.outputs.env }} npx playwright test tests/api
               ;;
             e2e)
-              ENV=${{ steps.target.outputs.env }} npm run e2e
+              ENV=${{ steps.target.outputs.env }} npx playwright test tests/e2e
               ;;
             all)
-              ENV=${{ steps.target.outputs.env }} npm run test
+              ENV=${{ steps.target.outputs.env }} npx playwright test
               ;;
             *)
               echo "Unknown suite: ${{ steps.target.outputs.suite }}"

@@ -16,33 +16,97 @@ Test timeout of 60000ms exceeded.
 ```
 
 ```
-Error: locator.fill: Test timeout of 60000ms exceeded.
+Error: locator.click: Test timeout of 60000ms exceeded.
 Call log:
-  - waiting for getByLabel(/Số điện thoại/i)
+  - waiting for getByRole('button', { name: /Gửi mã OTP/i })
+    - locator resolved to <button disabled class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-200 ease-[var(--ease-spring)] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500/40 bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 px-8 py-5 text-[17px] rounded-2xl w-full">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 100ms
+    115 × waiting for element to be visible, enabled and stable
+        - element is not enabled
+      - retrying click action
+        - waiting 500ms
 
 ```
 
 # Page snapshot
 
 ```yaml
-- main [ref=e2]:
-  - generic [ref=e3]:
-    - generic [ref=e4]:
-      - img [ref=e5]
-      - heading "Not Found" [level=1] [ref=e8]
-    - generic [ref=e9]:
-      - paragraph [ref=e10]: The train has not arrived at the station.
-      - paragraph [ref=e11]:
-        - text: Please check your
-        - link "network settings" [ref=e12] [cursor=pointer]:
-          - /url: https://docs.railway.com/guides/public-networking#railway-provided-domain
-        - text: to confirm that your domain has provisioned.
-      - paragraph [ref=e13]: If you are a visitor, please let the owner know you're stuck at the station.
-    - paragraph [ref=e15]:
-      - text: "Request ID:"
-      - text: MNmzzul2TeqrnR4VAXC71g
-    - link "Go to Railway" [ref=e17] [cursor=pointer]:
-      - /url: https://railway.com
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - banner [ref=e4]:
+        - generic "AIMICA" [ref=e6]:
+          - img "AIMICA" [ref=e7]
+      - main [ref=e8]:
+        - generic [ref=e9]:
+          - img [ref=e11]
+          - heading "Đăng nhập AIMICA" [level=1] [ref=e13]
+          - paragraph [ref=e14]: Nhập số điện thoại — chúng tôi sẽ gửi mã OTP để xác thực.
+          - generic [ref=e15]:
+            - generic [ref=e16]: Số điện thoại
+            - textbox "Số điện thoại Dùng số bạn đã đăng ký tài khoản AIMICA." [active] [ref=e18]:
+              - /placeholder: 0912 345 678
+            - generic [ref=e19]: Dùng số bạn đã đăng ký tài khoản AIMICA.
+          - button "Gửi mã OTP" [disabled] [ref=e21]:
+            - text: Gửi mã OTP
+            - img [ref=e22]
+          - generic [ref=e24]:
+            - text: Chưa có tài khoản?
+            - button "Đăng ký ngay" [ref=e25] [cursor=pointer]
+    - generic [ref=e27]:
+      - button "Mở trợ lý AIMICA" [ref=e28] [cursor=pointer]:
+        - generic:
+          - img
+        - generic:
+          - img
+      - complementary:
+        - generic:
+          - button [ref=e29]:
+            - img [ref=e30]
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=2]: Chào bạn,
+                  - paragraph: Mình có thể giúp gì cho bạn hôm nay?
+                - generic:
+                  - generic:
+                    - generic:
+                      - button [ref=e33] [cursor=pointer]:
+                        - img [ref=e35]
+                        - generic [ref=e37]: Tư vấn BH cho gia đình
+                      - button [ref=e38] [cursor=pointer]:
+                        - img [ref=e40]
+                        - generic [ref=e45]: So sánh xe máy phổ biến
+                      - button [ref=e46] [cursor=pointer]:
+                        - img [ref=e48]
+                        - generic [ref=e51]: Quy trình bồi thường
+                      - button [ref=e52] [cursor=pointer]:
+                        - img [ref=e54]
+                        - generic [ref=e56]: Đăng ký nhanh
+                      - button [ref=e57] [cursor=pointer]:
+                        - img [ref=e59]
+                        - generic [ref=e64]: Kiếm tiền với AIMICA (CTV)
+                  - generic:
+                    - generic [ref=e67]:
+                      - generic [ref=e68]:
+                        - button [disabled]:
+                          - img
+                      - textbox [ref=e70]:
+                        - /placeholder: Nhập tin nhắn cho AIMICA…
+                      - generic [ref=e72]:
+                        - button [disabled]:
+                          - img
+                    - generic: AI có thể đưa ra thông tin chưa chính xác. Vui lòng kiểm tra lại các nội dung quan trọng.
+  - alert [ref=e73]
 ```
 
 # Test source
@@ -146,9 +210,9 @@ Call log:
   96  |     const { phone } = byId("TC-007");
   97  | 
   98  |     await page.goto("/login", { waitUntil: "domcontentloaded" });
-> 99  |     await page.getByLabel(/Số điện thoại/i).fill(phone);
-      |                                             ^ Error: locator.fill: Test timeout of 60000ms exceeded.
-  100 |     await page.getByRole("button", { name: /Gửi mã OTP/i }).click();
+  99  |     await page.getByLabel(/Số điện thoại/i).fill(phone);
+> 100 |     await page.getByRole("button", { name: /Gửi mã OTP/i }).click();
+      |                                                             ^ Error: locator.click: Test timeout of 60000ms exceeded.
   101 | 
   102 |     await expect(page).toHaveURL(/\/otp/, { timeout: 15_000 });
   103 | 
