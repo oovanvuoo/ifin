@@ -1,0 +1,8 @@
+.env
+config/master.key
+log/*
+tmp/*
+node_modules/
+.tmp
+playwright-report/
+allure-results/

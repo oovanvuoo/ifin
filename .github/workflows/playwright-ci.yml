@@ -1,0 +1,124 @@
+name: Playwright CI
+
+on:
+  pull_request:
+    branches: ["**"]
+  push:
+    branches: ["main", "master", "develop"]
+  schedule:
+    - cron: "0 18 * * 1"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "stg"
+        type: choice
+        options:
+          - stg
+          - uat
+          - prod
+      suite:
+        description: "Test suite"
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - sanity
+          - regression
+          - api
+          - e2e
+          - all
+
+jobs:
+  playwright-tests:
+    name: Playwright Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 900
+
+    env:
+      CI: true
+      ENV: stg
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Resolve test target
+        id: target
+        shell: bash
+        run: |
+          SELECTED_ENV="stg"
+          SELECTED_SUITE="smoke"
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            SELECTED_ENV="${{ github.event.inputs.environment }}"
+            SELECTED_SUITE="${{ github.event.inputs.suite }}"
+          elif [[ "${{ github.event_name }}" == "schedule" ]]; then
+            SELECTED_ENV="stg"
+            SELECTED_SUITE="regression"
+          fi
+
+          echo "env=$SELECTED_ENV" >> "$GITHUB_OUTPUT"
+          echo "suite=$SELECTED_SUITE" >> "$GITHUB_OUTPUT"
+
+      - name: Run Playwright tests
+        shell: bash
+        run: |
+          echo "Running suite '${{ steps.target.outputs.suite }}' on ENV='${{ steps.target.outputs.env }}'"
+          case "${{ steps.target.outputs.suite }}" in
+            smoke)
+              ENV=${{ steps.target.outputs.env }} npm run smoke
+              ;;
+            sanity)
+              ENV=${{ steps.target.outputs.env }} npm run sanity
+              ;;
+            regression)
+              ENV=${{ steps.target.outputs.env }} npm run regression
+              ;;
+            api)
+              ENV=${{ steps.target.outputs.env }} npm run api
+              ;;
+            e2e)
+              ENV=${{ steps.target.outputs.env }} npm run e2e
+              ;;
+            all)
+              ENV=${{ steps.target.outputs.env }} npm run test
+              ;;
+            *)
+              echo "Unknown suite: ${{ steps.target.outputs.suite }}"
+              exit 1
+              ;;
+          esac
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report-${{ steps.target.outputs.env }}-${{ steps.target.outputs.suite }}-${{ github.run_number }}
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload raw test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-artifacts-${{ steps.target.outputs.env }}-${{ steps.target.outputs.suite }}-${{ github.run_number }}
+          path: |
+            test-results/
+            allure-results/
+          if-no-files-found: ignore
+          retention-days: 14

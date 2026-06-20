@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "aaa_at",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJJTlNfMTA2Njk5MTQyNzE3Iiwic2lkIjoiZGQ4MTg3MTMtZTUyZC00ZDgwLTk3ODEtYTU5ODIxZWIwNWFkIiwicGhvbmUiOiIwOTEyMzQ1Njc4IiwianRpIjoiOWI5MjljNmUtMjMxZC00NGUyLTljNzUtM2NmNzcyMWRjYWJlIiwiaWF0IjoxNzgxOTUwNzE3LCJleHAiOjE3ODE5NTQzMTd9.Wq7LCiTXyX-Q-ZMcfhZgooUf2Dfsr6m44EOHShMW1uM",
+      "domain": "nomi-staging-3c09.up.railway.app",
+      "path": "/",
+      "expires": 1781954317.742149,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "aaa_rt",
+      "value": "1b13fd9f60fddeb4fd8eabe3fcb22d5f265c8c280d65d8d2752576210ba8e6fca4a48a235bde8bf13a03691bd41e639f",
+      "domain": "nomi-staging-3c09.up.railway.app",
+      "path": "/",
+      "expires": 1784542717.742316,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "nomi_active_thread_id",
+      "value": "b8efeb63-632f-45e1-8588-373628b0bb23",
+      "domain": "nomi-staging-3c09.up.railway.app",
+      "path": "/",
+      "expires": 1784542717.923681,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

@@ -1,0 +1,47 @@
+{
+  "name": "ifin-playwright-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Enterprise-grade Playwright automation framework for iFin QA assessment",
+  "scripts": {
+    "test": "playwright test",
+    "test:stg": "ENV=stg playwright test",
+    "test:uat": "ENV=uat playwright test",
+    "test:prod": "ENV=prod playwright test",
+    "smoke": "playwright test --grep @smoke",
+    "smoke:stg": "ENV=stg playwright test --grep @smoke",
+    "smoke:uat": "ENV=uat playwright test --grep @smoke",
+    "smoke:prod": "ENV=prod playwright test --grep @smoke",
+    "sanity": "playwright test --grep @sanity",
+    "sanity:stg": "ENV=stg playwright test --grep @sanity",
+    "sanity:uat": "ENV=uat playwright test --grep @sanity",
+    "sanity:prod": "ENV=prod playwright test --grep @sanity",
+    "regression": "playwright test --grep @regression",
+    "regression:stg": "ENV=stg playwright test --grep @regression",
+    "regression:uat": "ENV=uat playwright test --grep @regression",
+    "regression:prod": "ENV=prod playwright test --grep @regression",
+    "api": "playwright test tests/api",
+    "api:stg": "ENV=stg playwright test tests/api",
+    "api:uat": "ENV=uat playwright test tests/api",
+    "api:prod": "ENV=prod playwright test tests/api",
+    "e2e": "playwright test --grep @e2e",
+    "e2e:stg": "ENV=stg playwright test --grep @e2e",
+    "e2e:uat": "ENV=uat playwright test --grep @e2e",
+    "e2e:prod": "ENV=prod playwright test --grep @e2e",
+    "report": "playwright show-report",
+    "lint": "eslint . --ext .ts"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.18.3",
+    "allure-playwright": "^3.4.1",
+    "dotenv": "^17.2.1",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.0"
+  }
+}
