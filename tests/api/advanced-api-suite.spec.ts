@@ -59,7 +59,6 @@ test.describe("E1 - Advanced API Automation", () => {
     });
     const happyStatus = happyRes.status();
     expect([200, 201, 400, 409, 422, 429]).toContain(happyStatus);
-    expect(happyStatus).toBeLessThan(500);
     const happyBody = await happyRes.json().catch(() => ({}));
     expect(typeof happyBody).toBe("object");
 
@@ -68,7 +67,6 @@ test.describe("E1 - Advanced API Automation", () => {
     });
     const negativeStatus = negativeRes.status();
     expect([400, 409, 422, 429]).toContain(negativeStatus);
-    expect(negativeStatus).toBeLessThan(500);
     const negativeBody = await negativeRes.json().catch(() => ({}));
     expect(typeof negativeBody).toBe("object");
 
