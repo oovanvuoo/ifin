@@ -1,12 +1,14 @@
 import { test as base } from "@playwright/test";
-import { LoginPage } from "../pages/auth/LoginPage";
-import { SignupPage } from "../pages/auth/SignupPage";
-import { OtpPage } from "../pages/auth/OtpPage";
-import { CtvPage } from "../pages/ctv/CtvPage";
-import { AuthAssertions } from "../assertions/auth/AuthAssertions";
-import { CtvAssertions } from "../assertions/ctv/CtvAssertions";
+import { HomePage } from "../pages/ui/HomePage.js";
+import { LoginPage } from "../pages/auth/LoginPage.js";
+import { SignupPage } from "../pages/auth/SignupPage.js";
+import { OtpPage } from "../pages/auth/OtpPage.js";
+import { CtvPage } from "../pages/ctv/CtvPage.js";
+import { AuthAssertions } from "../assertions/auth/AuthAssertions.js";
+import { CtvAssertions } from "../assertions/ctv/CtvAssertions.js";
 
 type UiFixtures = {
+  homePage: HomePage;
   loginPage: LoginPage;
   signupPage: SignupPage;
   otpPage: OtpPage;
@@ -16,6 +18,9 @@ type UiFixtures = {
 };
 
 export const test = base.extend<UiFixtures>({
+  homePage: async ({ page }, use) => {
+    await use(new HomePage(page));
+  },
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },

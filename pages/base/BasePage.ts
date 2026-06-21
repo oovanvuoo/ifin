@@ -18,4 +18,15 @@ export abstract class BasePage {
   async waitForPageLoad(): Promise<void> {
     await this.page.waitForLoadState("domcontentloaded");
   }
+
+  protected async tryToFill(locator: any, value: string): Promise<void> {
+    // Must be retry because FE have some process refresh UI after fill input.
+   for (let attempt = 0; attempt < 3; attempt++) {
+      await locator.fill(value);
+      await this.page.waitForTimeout(1000); // Wait for 1000ms to allow the UI to update
+      if((await locator.inputValue()) === value) {
+        return; // Successfully filled the input
+      }
+    }
+  }
 }

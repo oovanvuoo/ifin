@@ -1,5 +1,0 @@
-testcaseID,phone,fullName
-TC-001,0911111111,QA Signup User 001
-TC-004,0912345678,QA Signup Existing 004
-TC-005,09123,QA Boundary Min 005
-TC-006,0912345678999,QA Boundary Max 006

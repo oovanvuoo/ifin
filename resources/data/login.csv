@@ -1,5 +1,3 @@
-testcaseID,phone,fullName
-TC-002,0912345678,QA Login User 002
-TC-003,0912345678,QA Login User 003
-TC-007,0912345678,QA OTP Expired 007
-TC-008,0912345678,QA OTP Concurrent 008
+testcaseID,phone,fullName,otpCode,canLogin,isSkip
+TC-002,0912345677,Mr V,,true,false
+TC-003,0912345676,Nguyễn Ngọc,111111,false,false

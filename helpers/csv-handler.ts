@@ -1,10 +1,8 @@
-import fs from "fs";
+import fs from 'fs';
 import { parse } from 'csv-parse/sync';
 
 export class CSVHandling {
-  
-
-  /** *
+  /**
    * Read the CSV file
    * @param filePath
    * @returns array of object

@@ -1,7 +1,15 @@
-import { BasePage } from "../base/BasePage";
+import { expect } from "../../fixtures/testFixtures.js";
+import { BasePage } from "../base/BasePage.js";
 
 export class OtpPage extends BasePage {
-  private readonly verifyButton = this.page.getByRole("button", { name: /Xác thực.*đăng nhập/i });
+  private readonly verifyButton = this.page.getByRole("button", { name: /Xác thực.*(đăng nhập|Tạo tài khoản)/i });
+
+
+  async isOtpPageVisible(): Promise<boolean> {
+    await expect(this.page).toHaveURL(/\/otp/, { timeout: 15_000 });
+    const heading = this.page.getByRole("heading", { name: /Nhập mã OTP/i });
+    return heading.isVisible();
+  }
 
   /**
    * Fill the OTP code. Handles both single-input and multi-box OTP layouts:
@@ -11,6 +19,8 @@ export class OtpPage extends BasePage {
   async fillOtp(otp: string): Promise<void> {
     const inputs = this.page.locator("input");
     const count = await inputs.count();
+
+    console.log(`Filling OTP: ${otp} into ${count} input(s)`);
 
     if (count >= otp.length) {
       // Multi-box OTP: fill each box individually
@@ -25,7 +35,7 @@ export class OtpPage extends BasePage {
   }
 
   async submitOtp(): Promise<void> {
-    await this.click(this.verifyButton);
+    await this.verifyButton.click();
   }
 
   async isVerifyButtonDisabled(): Promise<boolean> {

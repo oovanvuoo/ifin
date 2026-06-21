@@ -1,6 +1,7 @@
 {
   "name": "ifin-playwright-automation",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "description": "Enterprise-grade Playwright automation framework for iFin QA assessment",
   "scripts": {
