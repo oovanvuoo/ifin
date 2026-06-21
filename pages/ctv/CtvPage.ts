@@ -1,4 +1,4 @@
-import { BasePage } from "../base/BasePage";
+import { BasePage } from "../base/BasePage.js";
 import type { Page } from "@playwright/test";
 
 export class CtvPage extends BasePage {
