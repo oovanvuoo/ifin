@@ -1,7 +1,6 @@
 import { test } from "../../fixtures/testFixtures.js";
+import { Constants } from "../../helpers/constants.js";
 import { UserFaker } from "../../helpers/user-faker.js";
-
-const otpDefault = "000000";
 
 // ──────────────────────────────────────────────────────────────────────────────
 test.describe("C - Registration Flow", () => {
@@ -14,8 +13,10 @@ test.describe("C - Registration Flow", () => {
     await signupPage.fillRegistrationForm(uniquePhone, uniqueFullName);
     await signupPage.submitForOtp();
     await otpPage.isOtpPageVisible();
-    await otpPage.fillOtp(otpDefault);
+    await otpPage.fillOtp(Constants.OTP_DEFAULT);
     await otpPage.submitOtp();
+    await homePage.waitForHomePageLoad();
+    await homePage.verifyLoggedInUserIsVisible(uniqueFullName);
   });
 
   test("TC-005 | Validate độ dài số điện thoại tối thiểu", async ({ homePage, signupPage }) => {

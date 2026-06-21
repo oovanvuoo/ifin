@@ -20,8 +20,6 @@ export class OtpPage extends BasePage {
     const inputs = this.page.locator("input");
     const count = await inputs.count();
 
-    console.log(`Filling OTP: ${otp} into ${count} input(s)`);
-
     if (count >= otp.length) {
       // Multi-box OTP: fill each box individually
       for (let i = 0; i < otp.length; i++) {
