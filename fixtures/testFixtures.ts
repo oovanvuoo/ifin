@@ -6,6 +6,7 @@ import { OtpPage } from "../pages/auth/OtpPage.js";
 import { CtvPage } from "../pages/ctv/CtvPage.js";
 import { AuthAssertions } from "../assertions/auth/AuthAssertions.js";
 import { CtvAssertions } from "../assertions/ctv/CtvAssertions.js";
+import { SamnonitePage } from "../pages/SamnonitePage.js";
 
 type UiFixtures = {
   homePage: HomePage;
@@ -15,6 +16,7 @@ type UiFixtures = {
   ctvPage: CtvPage;
   authAssertions: AuthAssertions;
   ctvAssertions: CtvAssertions;
+  samnonitePage: SamnonitePage;
 };
 
 export const test = base.extend<UiFixtures>({
@@ -38,20 +40,23 @@ export const test = base.extend<UiFixtures>({
   },
   ctvAssertions: async ({ page }, use) => {
     await use(new CtvAssertions(page));
+  },
+  samnonitePage: async ({ page }, use) => {
+    await use(new SamnonitePage(page));
   }
 });
 
-test.afterEach(async ({ page }, testInfo) => {
-  const isFailed = testInfo.status !== testInfo.expectedStatus;
-  if (!isFailed) {
-    return;
-  }
+// test.afterEach(async ({ page }, testInfo) => {
+//   const isFailed = testInfo.status !== testInfo.expectedStatus;
+//   if (!isFailed) {
+//     return;
+//   }
 
-  const screenshot = await page.screenshot({ fullPage: true });
-  await testInfo.attach("failure-fullpage", {
-    body: screenshot,
-    contentType: "image/png"
-  });
-});
+//   const screenshot = await page.screenshot({ fullPage: true });
+//   await testInfo.attach("failure-fullpage", {
+//     body: screenshot,
+//     contentType: "image/png"
+//   });
+// });
 
 export { expect } from "@playwright/test";

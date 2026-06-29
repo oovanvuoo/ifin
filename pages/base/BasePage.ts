@@ -29,4 +29,13 @@ export abstract class BasePage {
       }
     }
   }
+
+  protected async waitForElementVisible(locator: Locator, timeout: number = 20000): Promise<Boolean> {
+    try {
+      await locator.waitFor({ state: "visible", timeout });
+      return true;
+    } catch {
+      return false;
+    }
+  }
 }

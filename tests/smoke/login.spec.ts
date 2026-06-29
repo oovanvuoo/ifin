@@ -8,7 +8,7 @@ console.log(dataset);
 test.describe("Login Flow", () => {
     for (const data of dataset) {
         if (data.isSkip === "true") {
-            test.skip(`${data.testcaseID} | Login successful valid OTP`, async ({ homePage, loginPage, otpPage }) => {});
+            test.skip(`${data.testcaseID} | Login successful valid OTP`, async ({}) => {});
             continue;
         }
         test(`${data.testcaseID} | Login successful valid OTP`, async ({ homePage, loginPage, otpPage }) => {
